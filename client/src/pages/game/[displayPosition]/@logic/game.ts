@@ -8,6 +8,7 @@ import type { Game } from './types';
 export class Gradius implements Game {
   displayPosition: number;
   background: HTMLImageElement;
+  shootSound: HTMLAudioElement;
   players: Player[];
   enemies: Enemy[];
   bullets: Bullet[];
@@ -36,6 +37,7 @@ export class Gradius implements Game {
     this.bullets = bullets.map((bullet) => new Bullet(this.displayPosition, bullet));
     this.background = new Image();
     this.background.src = staticPath.images.odaiba_jpg;
+    this.shootSound = new Audio(staticPath.sounds.shot_mp3);
     return new Promise<void>((resolve) => {
       this.background.onload = () => {
         resolve();
@@ -51,7 +53,7 @@ export class Gradius implements Game {
     ]);
 
     if (bullets.length > this.bullets.length) {
-      const audio = new Audio(staticPath.sounds.shot_mp3);
+      const audio = this.shootSound.cloneNode() as HTMLAudioElement;
       audio.play();
     }
 
