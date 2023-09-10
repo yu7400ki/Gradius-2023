@@ -2,10 +2,7 @@ import { ENEMY_HALF_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH } from 'commonConstantsWi
 import { staticPath } from 'src/utils/$path';
 import { apiClient } from 'src/utils/apiClient';
 import { computePosition } from 'src/utils/computePosition';
-import { Boom } from './boom';
-import { Bullet } from './bullet';
-import { Enemy } from './enemy';
-import { Player } from './player';
+import { Boom, Bullet, Enemy, Player } from './sprites';
 import type { Game } from './types';
 
 export class Gradius implements Game {

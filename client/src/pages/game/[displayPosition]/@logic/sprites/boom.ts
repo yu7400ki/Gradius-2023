@@ -1,7 +1,7 @@
 import { ENEMY_HALF_WIDTH, SCREEN_WIDTH } from 'commonConstantsWithClient';
 import { staticPath } from 'src/utils/$path';
-import { staticImplements } from './decorator';
-import type { Sprite, SpriteStatic } from './types';
+import { staticImplements } from '../decorator';
+import type { Sprite, SpriteStatic } from '../types';
 
 @staticImplements<SpriteStatic>()
 export class Boom implements Sprite {

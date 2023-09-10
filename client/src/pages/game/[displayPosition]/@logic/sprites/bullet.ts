@@ -2,8 +2,8 @@ import { BULLET_RADIUS, SCREEN_WIDTH } from 'commonConstantsWithClient';
 import type { BulletModel } from 'commonTypesWithClient/models';
 import { staticPath } from 'src/utils/$path';
 import { computePosition } from 'src/utils/computePosition';
-import { staticImplements } from './decorator';
-import type { Sprite, SpriteStatic } from './types';
+import { staticImplements } from '../decorator';
+import type { Sprite, SpriteStatic } from '../types';
 
 @staticImplements<SpriteStatic>()
 export class Bullet implements Sprite {

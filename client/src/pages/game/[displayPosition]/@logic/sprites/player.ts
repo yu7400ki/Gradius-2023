@@ -1,8 +1,8 @@
 import { PLAYER_HALF_WIDTH, SCREEN_WIDTH } from 'commonConstantsWithClient';
 import type { PlayerModel } from 'commonTypesWithClient/models';
 import { staticPath } from 'src/utils/$path';
-import { staticImplements } from './decorator';
-import type { Sprite, SpriteStatic } from './types';
+import { staticImplements } from '../decorator';
+import type { Sprite, SpriteStatic } from '../types';
 
 @staticImplements<SpriteStatic>()
 export class Player implements Sprite {
