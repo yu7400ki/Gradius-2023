@@ -8,7 +8,7 @@ import type { Sprite, SpriteStatic } from '../types';
 @staticImplements<SpriteStatic>()
 export class Enemy implements Sprite {
   static images: HTMLImageElement[] = [new Image(), new Image(), new Image()];
-  static initialized = false;
+  private static initialized = false;
   displayPosition: number;
   model: EnemyModel;
 
@@ -42,10 +42,6 @@ export class Enemy implements Sprite {
   }
 
   async draw(ctx: CanvasRenderingContext2D) {
-    if (!Enemy.initialized) {
-      throw new Error('Enemy is not initialized');
-    }
-
     const enemy = this.model;
     const image = Enemy.images[enemy.type];
     const pos = computePosition(enemy.createdPos, enemy.createdAt, enemy.direction);

@@ -6,7 +6,7 @@ import type { Sprite, SpriteStatic } from '../types';
 @staticImplements<SpriteStatic>()
 export class Boom implements Sprite {
   static images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
-  static initialized = false;
+  private static initialized = false;
   displayPosition: number;
   position: { x: number; y: number };
   frame: number;
@@ -46,10 +46,6 @@ export class Boom implements Sprite {
   }
 
   async draw(ctx: CanvasRenderingContext2D) {
-    if (!Boom.initialized) {
-      throw new Error('Boom is not initialized');
-    }
-
     const frame = this.frame;
     const images = Boom.images;
     const currentFrame = Math.min(Math.floor(frame / 2), images.length - 1);

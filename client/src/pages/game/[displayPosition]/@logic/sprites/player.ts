@@ -9,7 +9,7 @@ export class Player implements Sprite {
   static image = new Image();
   static angleLeft = document.createElement('canvas');
   static angleRight = document.createElement('canvas');
-  static initialized = false;
+  private static initialized = false;
   displayPosition: number;
   model: PlayerModel;
   static initialize() {
@@ -68,10 +68,6 @@ export class Player implements Sprite {
   }
 
   async draw(ctx: CanvasRenderingContext2D) {
-    if (!Player.initialized) {
-      throw new Error('Player is not initialized');
-    }
-
     const displayNumber = this.displayPosition;
     const player = this.model;
 

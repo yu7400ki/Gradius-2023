@@ -8,7 +8,7 @@ import type { Sprite, SpriteStatic } from '../types';
 @staticImplements<SpriteStatic>()
 export class Bullet implements Sprite {
   static images: HTMLImageElement[] = [new Image(), new Image()];
-  static initialized = false;
+  private static initialized = false;
   displayPosition: number;
   model: BulletModel;
 
@@ -41,10 +41,6 @@ export class Bullet implements Sprite {
   }
 
   async draw(ctx: CanvasRenderingContext2D) {
-    if (!Bullet.initialized) {
-      throw new Error('Bullet is not initialized');
-    }
-
     const bullet = this.model;
     const displayPosition = this.displayPosition;
     const ownerType = bullet.side === 'left' ? 0 : 1;
