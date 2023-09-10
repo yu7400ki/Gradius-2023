@@ -54,7 +54,7 @@ export class Gradius implements Game {
 
     if (bullets.length > this.bullets.length) {
       const audio = this.shootSound.cloneNode() as HTMLAudioElement;
-      audio.play();
+      await audio.play();
     }
 
     this.effect.forEach((boom) => boom.update());
