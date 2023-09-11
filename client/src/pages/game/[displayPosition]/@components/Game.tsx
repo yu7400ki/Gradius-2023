@@ -1,5 +1,6 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'commonConstantsWithClient';
 import { useEffect, useRef, useState } from 'react';
+import type { GameLoop } from '../@logic';
 
 type Props = {
   displayPosition: number;
@@ -28,12 +29,16 @@ export const Game: React.FC<Props> = ({ displayPosition }) => {
       throw new Error('Canvas context not found');
     }
 
+    let gameLoop: GameLoop | null = null;
     const load = async () => {
       const { Gradius, GameLoop } = await import('../@logic');
       const game = new Gradius(displayPosition);
-      await GameLoop.start(game, ctx);
+      gameLoop = await GameLoop.start(game, ctx);
     };
     load();
+    return () => {
+      gameLoop?.stop();
+    };
   }, [displayPosition]);
 
   useEffect(() => {

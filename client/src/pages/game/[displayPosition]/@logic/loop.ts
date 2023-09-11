@@ -1,5 +1,5 @@
-import type { Game, LoopStatic } from './types';
 import { staticImplements } from './decorator';
+import type { Game, LoopStatic } from './types';
 
 const FRAME_SIZE = (1.0 / 24.0) * 1000.0;
 
@@ -7,10 +7,12 @@ const FRAME_SIZE = (1.0 / 24.0) * 1000.0;
 export class GameLoop {
   lastFrame: number;
   accumulatedDelta: number;
+  requestId: number;
 
   constructor() {
     this.lastFrame = performance.now();
     this.accumulatedDelta = 0;
+    this.requestId = 0;
   }
 
   static async start(game: Game, ctx: CanvasRenderingContext2D) {
@@ -27,13 +29,19 @@ export class GameLoop {
       */
       if (instance.accumulatedDelta > FRAME_SIZE) {
         await game.update();
-        instance.accumulatedDelta -= FRAME_SIZE * Math.floor(instance.accumulatedDelta / FRAME_SIZE);
+        instance.accumulatedDelta -=
+          FRAME_SIZE * Math.floor(instance.accumulatedDelta / FRAME_SIZE);
       }
       instance.lastFrame = pref;
       await game.draw(ctx);
-      requestAnimationFrame(loop);
+      instance.requestId = requestAnimationFrame(loop);
     };
 
-    requestAnimationFrame(loop);
+    instance.requestId = requestAnimationFrame(loop);
+    return instance;
+  }
+
+  stop() {
+    cancelAnimationFrame(this.requestId);
   }
 }
